@@ -51,37 +51,36 @@ document.addEventListener("DOMContentLoaded", function () {
   let count = 0;
   let index = 0;
   let currentText = "";
-  let letter = "";
+  let isDeleting = false;
+  const typingElement = document.querySelector(".typing-text");
 
   function type() {
-    if (count === texts.length) {
-      count = 0;
-    }
     currentText = texts[count];
-    letter = currentText.slice(0, ++index);
 
-    document.querySelector(".typing-text").textContent = letter;
-    if (letter.length === currentText.length) {
-      setTimeout(erase, 1500);
+    if (!isDeleting) {
+      // typing forward
+      typingElement.textContent = currentText.slice(0, ++index);
+      if (index === currentText.length) {
+        isDeleting = true;
+        setTimeout(type, 1500); // wait before erasing
+        return;
+      }
     } else {
-      setTimeout(type, 100);
+      // erasing backward
+      typingElement.textContent = currentText.slice(0, --index);
+      if (index === 0) {
+        isDeleting = false;
+        count = (count + 1) % texts.length; // move to next word
+        setTimeout(type, 500); // wait before typing new word
+        return;
+      }
     }
+
+    setTimeout(type, isDeleting ? 50 : 100);
   }
 
-  function erase() {
-    letter = currentText.slice(0, --index);
-    document.querySelector(".typing-text").textContent = letter;
-    if (letter.length === 0) {
-      count++;
-      index = 0;
-      setTimeout(type, 500);
-    } else {
-      setTimeout(erase, 50);
-    }
-  }
-
-  // Start the typing effect after initial animation
-  setTimeout(type, 2000);
+  // Start typing after short delay
+  setTimeout(type, 1000);
 
   // Interactive background animation
   document.addEventListener("mousemove", (e) => {
@@ -93,8 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const speed = (index + 1) / 10;
       const xOffset = x * speed * 100;
       const yOffset = y * speed * 100;
-
-      circle.style.transform = `translateX(${xOffset}px) translateY(${yOffset}px)`;
+      circle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
     });
 
     const decorations = document.querySelectorAll(".decoration");
@@ -102,11 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const speed = (index + 1) / 20;
       const xOffset = x * speed * 30;
       const yOffset = y * speed * 30;
-
-      dec.style.transform = `translate(${xOffset}px, ${yOffset}px) ${dec.style.transform
-        .split(" ")
-        .slice(2)
-        .join(" ")}`;
+      dec.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
     });
   });
 });

@@ -418,17 +418,72 @@
           </div>
         </div>
       </div>
-
       <div class="footer-bottom">
         <p>© 2025 Akash Ranjan | All Rights Reserved.</p>
       </div>
     </footer>
-
     <script src="assets/logic.js"></script>
     <script>
       document.addEventListener("copy", function (event) {
         event.clipboardData.setData("text/plain", "⚠️ (Warning)");
         event.preventDefault();
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const texts = [
+          "Akash Ranjan",
+          "a Developer",
+          "a Designer",
+          "a Creator",
+        ];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let isDeleting = false;
+        const typingElement = document.querySelector(".typing-text");
+        function type() {
+          currentText = texts[count];
+          if (!isDeleting) {
+            typingElement.textContent = currentText.slice(0, ++index);
+            if (index === currentText.length) {
+              isDeleting = true;
+              setTimeout(type, 1500); // wait before erasing
+              return;
+            }
+          } else {
+            typingElement.textContent = currentText.slice(0, --index);
+            if (index === 0) {
+              isDeleting = false;
+              count = (count + 1) % texts.length; // move to next word
+              setTimeout(type, 500); // wait before typing new word
+              return;
+            }
+          }
+
+          setTimeout(type, isDeleting ? 50 : 100);
+        }
+        setTimeout(type, 1000);
+        document.addEventListener("mousemove", (e) => {
+          const circles = document.querySelectorAll(".circles li");
+          const x = e.clientX / window.innerWidth;
+          const y = e.clientY / window.innerHeight;
+
+          circles.forEach((circle, index) => {
+            const speed = (index + 1) / 10;
+            const xOffset = x * speed * 100;
+            const yOffset = y * speed * 100;
+            circle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+          });
+
+          const decorations = document.querySelectorAll(".decoration");
+          decorations.forEach((dec, index) => {
+            const speed = (index + 1) / 20;
+            const xOffset = x * speed * 30;
+            const yOffset = y * speed * 30;
+            dec.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+          });
+        });
       });
     </script>
   </body>
