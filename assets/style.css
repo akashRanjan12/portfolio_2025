@@ -241,6 +241,7 @@ header {
   opacity: 0;
   animation: fadeIn 1s ease forwards;
   animation-delay: 2s;
+  width: 100%;
 }
 .Btn {
   width: 45px;
@@ -251,7 +252,6 @@ header {
   border: none;
   background-color: transparent;
   position: relative;
-  /* overflow: hidden; */
   border-radius: 7px;
   cursor: pointer;
   transition: all 0.3s;
@@ -1336,6 +1336,13 @@ textarea {
 
 /* Responsive Design */
 @media (max-width: 992px) {
+  .skill-container {
+    padding-left: 30px;
+    padding-right: 10px;
+  }
+  .image-sec {
+    display: none;
+  }
   h1 {
     font-size: 3.2rem;
   }
@@ -1363,6 +1370,17 @@ textarea {
 }
 
 @media (max-width: 768px) {
+  .content {
+    p {
+      text-align: justify;
+      background-color: rgb(245, 245, 245, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  }
+  .typing-text {
+    font-size: 1.4rem;
+  }
   .nav-links {
     position: fixed;
     top: 50px;
@@ -1436,5 +1454,83 @@ textarea {
 
   .contact-container {
     gap: 2.5rem;
+  }
+}
+/* education section */
+.skill-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* floated image */
+.hero-container-00 {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-image {
+  width: 300px;
+  animation: float 4s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Background Shapes only around image */
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  z-index: 1;
+  animation: move 10s ease-in-out infinite;
+}
+
+.shape1 {
+  width: 150px;
+  height: 150px;
+  background: #ff6b6b;
+  top: -40px;
+  left: -60px;
+  animation-delay: 0s;
+}
+
+.shape2 {
+  width: 120px;
+  height: 120px;
+  background: #1dd1a1;
+  bottom: -40px;
+  right: -50px;
+  animation-delay: 3s;
+}
+
+.shape3 {
+  width: 100px;
+  height: 100px;
+  background: #54a0ff;
+  bottom: 20px;
+  left: -50px;
+  animation-delay: 6s;
+}
+
+@keyframes move {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.1);
   }
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Image with Background Shapes</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f0f4f8;
+        margin: 0;
+      }
+
+      .hero-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Hero Image */
+      .hero-image {
+        width: 350px;
+        animation: float 4s ease-in-out infinite;
+        position: relative;
+        z-index: 2;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Background Shapes only around image */
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.5;
+        z-index: 1;
+        animation: move 10s ease-in-out infinite;
+      }
+
+      .shape1 {
+        width: 150px;
+        height: 150px;
+        background: #ff6b6b;
+        top: -40px;
+        left: -60px;
+        animation-delay: 0s;
+      }
+
+      .shape2 {
+        width: 120px;
+        height: 120px;
+        background: #1dd1a1;
+        bottom: -40px;
+        right: -50px;
+        animation-delay: 3s;
+      }
+
+      .shape3 {
+        width: 100px;
+        height: 100px;
+        background: #54a0ff;
+        bottom: 20px;
+        left: -50px;
+        animation-delay: 6s;
+      }
+
+      @keyframes move {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-30px) scale(1.1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero-container">
+      <!-- Background Shapes -->
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
+
+      <!-- Hero Image -->
+      <img
+        src="assets/raws/WhatsApp Image 2025-09-08 at 22.19.01.jpeg"
+        alt="Hero Animated"
+        width="350"
+        class="hero-image" />
+    </div>
+  </body>
+</html>
